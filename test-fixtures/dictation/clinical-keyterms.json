@@ -1,0 +1,17 @@
+[
+  "acetaminophen", "albuterol", "allopurinol", "amlodipine", "amoxicillin",
+  "amoxicillin-clavulanate", "atorvastatin", "azithromycin", "bisoprolol",
+  "budesonide", "carvedilol", "cephalexin", "cetirizine", "ciprofloxacin",
+  "clavulanate", "clindamycin", "clopidogrel", "dexamethasone", "diclofenac",
+  "doxycycline", "empagliflozin", "enalapril", "escitalopram", "famotidine",
+  "ferrous sulfate", "fluticasone", "furosemide", "gabapentin", "gliclazide",
+  "hydrochlorothiazide", "ibuprofen", "insulin", "levothyroxine", "lisinopril",
+  "loratadine", "losartan", "metformin", "metoprolol", "naproxen",
+  "nitrofurantoin", "omeprazole", "ondansetron", "pantoprazole", "prednisone",
+  "rosuvastatin", "salbutamol", "sertraline", "simvastatin", "spironolactone",
+  "trimethoprim", "valsartan", "warfarin", "asthma", "bradycardia",
+  "bronchitis", "cellulitis", "diabetes", "dyspnea", "dysuria", "edema",
+  "hematuria", "hemoptysis", "hypertension", "hypotension", "hypoglycemia",
+  "hypoxia", "neuropathy", "palpitations", "pneumonia", "rhinorrhea",
+  "sinusitis", "tachycardia", "thrombocytopenia", "wheezing"
+]

@@ -1,0 +1,12 @@
+[package]
+name = "lmnop-parakeet-onnx"
+version = "0.1.0"
+edition = "2024"
+[lib]
+crate-type = ["cdylib"]
+[dependencies]
+parakeet-rs = { git = "https://github.com/altunenes/parakeet-rs", rev = "9746b713058ea22d668d5a234a2e161bd1883207", default-features = false, features = ["cpu", "api-28"] }
+serde_json = "1"
+ort = { version = "=2.0.0-rc.13", default-features = false, features = ["std", "ndarray", "api-28"] }
+[profile.release]
+strip = true

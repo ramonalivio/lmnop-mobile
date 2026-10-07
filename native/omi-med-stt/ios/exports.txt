@@ -1,0 +1,5 @@
+_lmnop_omi_load
+_lmnop_omi_transcribe
+_lmnop_omi_error
+_lmnop_omi_free_text
+_lmnop_omi_release

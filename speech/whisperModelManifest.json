@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "model": "Whisper Small Q5_1",
+  "modelKey": "whisper-small-q5_1",
+  "filename": "ggml-small-q5_1.bin",
+  "size": 190085487,
+  "sha256": "ae85e4a935d7a567bd102fe55afc16bb595bdb618e11b2fc7591bc08120411bb",
+  "chunkSize": 67108864,
+  "baseURL": "https://updates.example.invalid/models/whisper-small-q5_1/ae85e4a935d7a567bd102fe55afc16bb595bdb618e11b2fc7591bc08120411bb",
+  "sourceURL": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-small-q5_1.bin",
+  "chunks": [
+    {
+      "name": "chunk-000.bin",
+      "size": 67108864,
+      "sha256": "128eee5fd00af308b5501797fe9d29427c8e999703603afb9b0be03cf8f6855d"
+    },
+    {
+      "name": "chunk-001.bin",
+      "size": 67108864,
+      "sha256": "5073fad5aa3de70d65d4a50fb0cc291b599d137ebad3c00147f00cefa0332024"
+    },
+    {
+      "name": "chunk-002.bin",
+      "size": 55867759,
+      "sha256": "f98bbf0ecca28c765ce9fb1d077f10b4e3cc1fc9a05b36cd42fbce451a727416"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+node_modules/
+build/
+dist/
+coverage/
+.gradle/
+.cxx/
+.kotlin/
+Pods/
+DerivedData/
+.env
+.env.*
+!.env.example
+*.keystore
+*.apk
+*.ipa
+*.log

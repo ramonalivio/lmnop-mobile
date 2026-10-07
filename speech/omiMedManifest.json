@@ -1,0 +1,12 @@
+{
+  "revision": "c78333664b14e8dd8e47ed063be9692ed9054390",
+  "repository": "omi-health/omi-med-stt-v1-gguf",
+  "files": [
+    {
+      "name": "omi-med-stt-v1-q8_0.gguf",
+      "bytes": 929205888,
+      "sha256": "c4f364a730df7aa9bb0714cda1b1ad5e3104331db9919bb0e2a379d0fb64dbab",
+      "url": "https://huggingface.co/omi-health/omi-med-stt-v1-gguf/resolve/c78333664b14e8dd8e47ed063be9692ed9054390/omi-med-stt-v1-q8_0.gguf"
+    }
+  ]
+}

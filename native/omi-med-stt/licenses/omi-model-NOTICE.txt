@@ -1,0 +1,8 @@
+Omi Med STT v1 by Omi Health. English medical fine-tune of NVIDIA Parakeet TDT 0.6B v2.
+https://huggingface.co/omi-health/omi-med-stt-v1
+https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2
+Weights: Creative Commons Attribution 4.0 International (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+Q8_0 GGUF export supplied by Omi Health. LMNOP does not modify these weights.
+Native runtime: mudler/parakeet.cpp b11fe5bca78ad8b342dd559a43d76df3984bb447
+with Omi adapter v2 from Omi-Health/omi-med-stt-runtime 41689b213622b0bf87cdcd75047b272facec9393.
