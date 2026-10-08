@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 import RNFS from 'react-native-fs';
-import { WhisperAudio } from './whisperAudio';
+import { SpeechAudio } from './speechAudio';
 import { savePerformanceRecording } from './performanceReports';
 
 type Details = {
@@ -37,12 +37,8 @@ type Bridge = {
 
 /** Ordered, best-effort metrics: instrumentation must never break dictation. */
 export class SpeechProfiler {
-  private audio = new WhisperAudio();
+  private audio = new SpeechAudio();
   private metadata: Details = {};
-  private whisperBackend: Pick<
-    Details,
-    'gpu' | 'reasonNoGPU' | 'elapsedMs'
-  > | null = null;
   private events: unknown[] = [];
   private recordingAt = 0;
   private stopAt = 0;
@@ -66,7 +62,7 @@ export class SpeechProfiler {
   }
   async finishRecording(result: string, success: boolean) {
     const audio = this.audio;
-    this.audio = new WhisperAudio();
+    this.audio = new SpeechAudio();
     if (!audio.count) return;
     const events = [...this.events];
     const details = {
@@ -80,7 +76,6 @@ export class SpeechProfiler {
         : result,
       fullResult: result,
       liveResult: this.liveResult,
-      whisperBackend: this.whisperBackend,
       tdtLoadMs: this.metadata.tdtLoadMs,
       omiLoadMs: this.metadata.omiLoadMs,
       success: success && !this.recordingError,
@@ -153,13 +148,6 @@ export class SpeechProfiler {
       this.metadata = { ...this.metadata, omiLoadMs: details.elapsedMs };
     if (phase === 'tdt-model-ready')
       this.metadata = { ...this.metadata, tdtLoadMs: details.elapsedMs };
-    if (phase === 'whisper-model-ready') {
-      this.whisperBackend = {
-        gpu: details.gpu,
-        reasonNoGPU: details.reasonNoGPU,
-        elapsedMs: details.elapsedMs,
-      };
-    }
     if (phase === 'recording') {
       this.recordingAt = speechProfileNow();
       this.stopAt = 0;

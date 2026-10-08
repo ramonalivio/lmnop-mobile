@@ -76,17 +76,12 @@ android {
     testBuildType "release"
     androidResources {
         noCompress += ["bin", "onnx", "ort", "json"]
-        // Retired Android model payloads must not return via experiment setup.
-        ignoreAssetsPattern = (ignoreAssetsPattern ?: "") + ":sherpa-onnx-streaming-zipformer-en-2023-06-26"
     }
     externalNativeBuild {
         cmake {
             path file("src/main/cpp/CMakeLists.txt")
             version "3.22.1"
         }
-    }
-    packaging {
-        jniLibs.excludes += ["**/liblmnop_parakeet_onnx.so", "**/liblmnop_ort.so", "**/liblmnop_parakeet_jni.so"]
     }
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -101,18 +96,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode 19
         versionName "1.0"
-        buildConfigField "boolean", "IS_WHISPER_BENCH", "false"
-    }
-    flavorDimensions += "appMode"
-    productFlavors {
-        mobile {
-            dimension "appMode"
-        }
-        whisperBench {
-            dimension "appMode"
-            applicationIdSuffix ".whisperbench"
-            buildConfigField "boolean", "IS_WHISPER_BENCH", "true"
-        }
     }
     signingConfigs {
         debug {

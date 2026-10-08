@@ -24,6 +24,6 @@ add_library(lmnop_omi_med_cpu SHARED cpu_features.cpp)
 target_link_options(lmnop_omi_med_cpu PRIVATE "-Wl,-z,max-page-size=16384")
 target_include_directories(lmnop_omi_med PRIVATE "${OMI_ENGINE_SOURCE}/src")
 target_compile_options(lmnop_omi_med PRIVATE -O3)
-# Keep GGML private: whisper.rn ships a separate version in the same process.
+# Keep bundled GGML symbols private to this runtime.
 target_link_options(lmnop_omi_med PRIVATE "-Wl,--exclude-libs,ALL" "-Wl,-Bsymbolic" "-Wl,-z,max-page-size=16384")
 target_link_libraries(lmnop_omi_med PRIVATE parakeet android log)

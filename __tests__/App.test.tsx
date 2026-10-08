@@ -5,7 +5,6 @@
 import React from 'react';
 import ReactTestRenderer from 'react-test-renderer';
 import App, {parseAuthCallback} from '../App';
-import {applyMedicalTerminologyCorrection} from '../speech/medicalTerminology';
 
 test('renders correctly', async () => {
   await ReactTestRenderer.act(() => {
@@ -47,12 +46,4 @@ test('parses custom scheme callback when React Native URL omits host and path', 
     sessionToken: 'iv.encrypted',
     status: 'ok',
   });
-});
-
-test('normalizes common medical terminology in speech transcripts', () => {
-  expect(
-    applyMedicalTerminologyCorrection(
-      'patient mentioned hippa and a 1 c while taking met form in',
-    ),
-  ).toBe('patient mentioned HIPAA and A1C while taking metformin');
 });

@@ -1,14 +1,9 @@
 import type { RefinementOptions } from './refinementOptions';
 export type { RefinementOptions } from './refinementOptions';
-import type { WhisperSpeechToTextSession } from './whisperSpeechToText';
 import { MoonshineSpeechToTextSession } from './moonshineSpeechToText';
-import type { ZipformerSpeechToTextSession } from './zipformerSpeechToText';
 
-export type { SpeechStatus, SpeechTranscript } from './zipformerSpeechToText';
-export type SpeechToTextSession =
-  | WhisperSpeechToTextSession
-  | MoonshineSpeechToTextSession
-  | ZipformerSpeechToTextSession;
+export type { SpeechStatus, SpeechTranscript } from './speechTypes';
+export type SpeechToTextSession = MoonshineSpeechToTextSession;
 
 export function createSpeechToTextSession(
   confirmed = '',

@@ -6,6 +6,9 @@ export const omiMedModelBytes = manifest.files.reduce(
   (sum, file) => sum + file.bytes,
   0,
 );
+export function formatModelBytes(bytes: number) {
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
 const directory = `${RNFS.DocumentDirectoryPath}/OfflineSpeech/omi-med-stt-v1-q8_0`;
 export type OmiMedModelState = {
   phase:

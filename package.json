@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
-    "postinstall": "node scripts/patch-sherpa-ios.cjs && node scripts/patch-rnfs-ios.cjs && node scripts/patch-whisper-bench-timings.cjs",
+    "postinstall": "node scripts/patch-sherpa-ios.cjs && node scripts/patch-rnfs-ios.cjs",
     "start": "react-native start",
     "test": "jest"
   },
@@ -17,8 +17,7 @@
     "react-native": "0.87.0",
     "react-native-fs": "^2.20.0",
     "react-native-safe-area-context": "^5.5.2",
-    "react-native-sherpa-onnx": "^0.4.3",
-    "whisper.rn": "0.7.4"
+    "react-native-sherpa-onnx": "^0.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

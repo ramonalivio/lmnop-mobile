@@ -8,11 +8,10 @@ import clinicalKeyterms from '../test-fixtures/dictation/clinical-keyterms.json'
 import { normalizeClinicalText } from './normalizeClinicalText';
 import { finishDictationSentence } from './finishDictationSentence';
 import { SpeechProfiler, speechProfileNow } from './speechProfiler';
-import { WhisperLargeFinalPass } from './whisperLargeFinalPass';
 import type {
   SpeechTranscript,
-  ZipformerSpeechToTextCallbacks,
-} from './zipformerSpeechToText';
+  SpeechToTextCallbacks,
+} from './speechTypes';
 
 type MoonshineBridge = {
   prepare: (keyterms: string[]) => Promise<void>;
@@ -37,7 +36,7 @@ export class MoonshineSpeechToTextSession {
   private subscriptions: Array<() => void> = [];
   private processing = Promise.resolve();
   private captureError: Error | null = null;
-  private callbacks: ZipformerSpeechToTextCallbacks | null = null;
+  private callbacks: SpeechToTextCallbacks | null = null;
   private prefix = '';
   private protectedPrefix = '';
   private profiler = new SpeechProfiler();
@@ -45,20 +44,11 @@ export class MoonshineSpeechToTextSession {
   private firstText = false;
   private recordingStartedAt = 0;
   private audioSeconds = 0;
-  private finalPass:
-    | WhisperLargeFinalPass
-    | OmiMedFinalPass;
+  private finalPass: OmiMedFinalPass;
   private limitTimer: ReturnType<typeof setTimeout> | null = null;
   private limitReached = false;
   private cancelled = false;
   private transcript: SpeechTranscript;
-
-  getWhisperBackend() {
-    if (this.finalPass instanceof WhisperLargeFinalPass) {
-      return this.finalPass.backend;
-    }
-    return null;
-  }
 
   constructor(
     confirmed = '',
@@ -68,9 +58,7 @@ export class MoonshineSpeechToTextSession {
     private normalizeFinal = false,
     private refinement?: RefinementOptions,
   ) {
-    this.finalPass = refinement?.provider === 'whisper'
-      ? new WhisperLargeFinalPass()
-      : new OmiMedFinalPass();
+    this.finalPass = new OmiMedFinalPass();
     this.transcript = { confirmed, provisional: '' };
     this.protectedPrefix = confirmed;
   }
@@ -90,15 +78,11 @@ export class MoonshineSpeechToTextSession {
     return {
       model:
         this.refineOnStop
-          ? this.finalPass instanceof OmiMedFinalPass
-            ? 'Moonshine Medium Streaming + Omi Med STT v1 Q8_0 GGUF CPU'
-            : 'Moonshine Medium Streaming + Whisper Small Q5_1'
+          ? 'Moonshine Medium Streaming + Omi Med STT v1 Q8_0 GGUF CPU'
           : 'Moonshine Medium Streaming',
       runtime:
         this.refineOnStop
-          ? this.finalPass instanceof OmiMedFinalPass
-            ? 'moonshine-native + parakeet.cpp + Omi adapter / GGML CPU'
-            : 'moonshine-native + whisper.rn@0.7.4'
+          ? 'moonshine-native + parakeet.cpp + Omi adapter / GGML CPU'
           : 'moonshine-native',
     };
   }
@@ -129,7 +113,7 @@ export class MoonshineSpeechToTextSession {
     return this.ready;
   }
 
-  start(callbacks: ZipformerSpeechToTextCallbacks) {
+  start(callbacks: SpeechToTextCallbacks) {
     if (this.disposed) {
       return Promise.reject(new Error('Speech session has been disposed.'));
     }
@@ -168,10 +152,7 @@ export class MoonshineSpeechToTextSession {
       if (this.disposed) return;
       await this.prepare();
       if (this.disposed) return;
-      if (
-        this.refineOnStop &&
-        this.finalPass instanceof OmiMedFinalPass
-      ) {
+      if (this.refineOnStop) {
         this.callbacks?.onActivity?.('Loading Omi Med STT…');
         await this.finalPass.prepare(this.profiler);
         if (this.disposed || this.cancelled) return;

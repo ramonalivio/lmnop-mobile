@@ -1,6 +1,6 @@
 import { NativeModules, Platform } from 'react-native';
 import RNFS from 'react-native-fs';
-import { WhisperAudio, whisperPcm16 } from './whisperAudio';
+import { SpeechAudio, speechPcm16 } from './speechAudio';
 
 const directory = () => `${RNFS.DocumentDirectoryPath}/SpeechRecordings`;
 const endpoint = 'https://api.example.invalid/mobile/performance-reports';
@@ -76,8 +76,8 @@ function base64(bytes: Uint8Array) {
   }
   return result.join('');
 }
-export function wavBytes(audio: WhisperAudio) {
-  const pcm = whisperPcm16(audio.slice(0, audio.count), audio.rate);
+export function wavBytes(audio: SpeechAudio) {
+  const pcm = speechPcm16(audio.slice(0, audio.count), audio.rate);
   const bytes = new Uint8Array(44 + pcm.byteLength);
   const view = new DataView(bytes.buffer);
   const string = (offset: number, value: string) =>
@@ -99,7 +99,7 @@ export function wavBytes(audio: WhisperAudio) {
   return bytes;
 }
 export function savePerformanceRecording(
-  audio: WhisperAudio,
+  audio: SpeechAudio,
   details: Record<string, unknown>,
 ) {
   const save = async () => {

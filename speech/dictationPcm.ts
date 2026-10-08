@@ -1,7 +1,7 @@
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import type { PcmLiveStreamHandle } from 'react-native-sherpa-onnx/audio';
 
-/** Native Android AudioRecord avoids loading the retired Zipformer runtime. */
+/** Use the native Android recorder and the Sherpa PCM stream on iOS. */
 export function createDictationPcmStream(): PcmLiveStreamHandle {
   if (Platform.OS !== 'android')
     return require('react-native-sherpa-onnx/audio').createPcmLiveStream({

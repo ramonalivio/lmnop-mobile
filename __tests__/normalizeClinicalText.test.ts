@@ -1,5 +1,4 @@
 import { normalizeClinicalText } from '../speech/normalizeClinicalText';
-import { formatSpeechText } from '../speech/formatSpeechText';
 
 test.each([
   ['Metformin 500 milligrams twice daily', 'Metformin 500mg twice daily'],
@@ -31,10 +30,4 @@ test.each([
   'Over 54 years of experience',
 ])('leaves ambiguous or unrelated text unchanged: %s', input => {
   expect(normalizeClinicalText(input)).toBe(input);
-});
-
-test('Android sentence casing preserves temperature unit symbols', () => {
-  expect(formatSpeechText('TEMPERATURE 38.1\u00b0C AND 98.6\u00b0F')).toBe(
-    'Temperature 38.1\u00b0C and 98.6\u00b0F',
-  );
 });

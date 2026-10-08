@@ -1,6 +1,5 @@
-import { clearPauseRecoveryRecordings } from './speech/pauseRecovery';
 import * as OmiMedModel from './speech/omiMedModel';
-import { formatModelBytes } from './speech/offlineModel';
+import { formatModelBytes } from './speech/omiMedModel';
 import type { OmiMedModelState } from './speech/omiMedModel';
 import { RefinementTimer } from './speech/RefinementTimer';
 import {
@@ -36,7 +35,7 @@ const {
   downloadOmiMedModel: downloadOfflineModel,
   isOmiMedModelReady: isOfflineModelReady,
   observeOmiMedModel: observeOfflineModel,
-  omiMedModelBytes: whisperModelBytes,
+  omiMedModelBytes,
 } = OmiMedModel;
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { PerformanceReportModal } from './speech/PerformanceReportModal';
@@ -1572,7 +1571,6 @@ function AppContent() {
     setTranscriptionSaveError(null);
     speechSessionRef.current?.clear();
     setSpeechError(null);
-    await clearPauseRecoveryRecordings().catch(() => setSpeechError('Could not delete recovery audio. Press Clear to retry.'));
     await clearPerformanceRecordings(true).catch(() =>
       setSpeechError('Could not delete recorded audio. Press Clear to retry.'),
     );
@@ -2092,7 +2090,7 @@ function AppContent() {
                         ? 'Whole recording refined on Stop'
                         : `${formatModelBytes(
                             offlineModel.downloadedBytes ?? 0,
-                          )} / ${formatModelBytes(whisperModelBytes)}`}
+                          )} / ${formatModelBytes(omiMedModelBytes)}`}
                     </Text>
                     {offlineModel.phase !== 'ready' && (
                         <View
@@ -2100,7 +2098,7 @@ function AppContent() {
                           accessibilityLabel="Offline model download"
                           accessibilityValue={{
                             min: 0,
-                            max: whisperModelBytes,
+                            max: omiMedModelBytes,
                             now: offlineModel.downloadedBytes ?? 0,
                           }}
                           style={styles.modelProgressTrack}

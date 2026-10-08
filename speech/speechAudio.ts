@@ -1,5 +1,5 @@
 /** Per-press PCM. Retain original samples; resampling uses whole windows, never chunks. */
-export class WhisperAudio {
+export class SpeechAudio {
   private chunks: Array<{ start: number; samples: Float32Array }> = [];
   count = 0;
   rate = 0;
@@ -77,8 +77,8 @@ export function hasSpeechEnergy(samples: Float32Array, rate: number) {
   return active >= rate * 0.1;
 }
 
-/** whisper.rn 0.7.4's native JSI accepts mono 16kHz *PCM16* ArrayBuffers. */
-export function whisperPcm16(samples: Float32Array, rate: number): ArrayBuffer {
+/** Resample whole windows to mono 16 kHz PCM16 for native transcription. */
+export function speechPcm16(samples: Float32Array, rate: number): ArrayBuffer {
   const ratio = rate / 16000;
   const output = new Int16Array(Math.floor(samples.length / ratio));
   // Integrate source samples over each output interval; preserves amplitude and

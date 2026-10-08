@@ -14,8 +14,12 @@ Backend components, credentials, signing files, local recordings, downloaded spe
 - `native/`, `ios/`, `android/` — first-party native integration source and project configuration, without compiled models or libraries.
 - `__tests__/` — focused React Native and speech workflow tests.
 
+## Speech path in this sample
+
+`App.tsx` creates a `MoonshineSpeechToTextSession` for live transcription. On Stop, `OmiMedFinalPass` can refine the recording with a separately downloaded Omi Med model. The `parakeet` provider value is an older internal key for this Omi route; it does not use the retired Parakeet ONNX experiment. The old pause dictation, Zipformer, and Whisper session implementations have been removed from this public sample.
+
 ## Validation
 
-With dependencies installed, `npx tsc --noEmit` passes, and `npm test -- --runInBand --forceExit` passes 17 suites and 121 tests in this snapshot. Historical tests for retired online speech behavior, older model-download assumptions, and private build tooling are omitted. The original private project remains untouched.
+With dependencies installed, `npx tsc --noEmit` passes, and `npm test -- --runInBand --forceExit` passes 11 suites and 70 tests in this snapshot. Historical tests for retired speech paths and private build tooling are omitted. The original private project remains untouched.
 
 This snapshot contains no patient records or voice recordings.

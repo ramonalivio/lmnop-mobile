@@ -18,7 +18,7 @@ target_include_directories(parakeet PRIVATE "${OMI_ENGINE_SOURCE}/third_party")
 add_library(${OMI_FRAMEWORK_NAME} SHARED omi_engine.cpp)
 target_include_directories(${OMI_FRAMEWORK_NAME} PRIVATE "${OMI_ENGINE_SOURCE}/src")
 target_link_libraries(${OMI_FRAMEWORK_NAME} PRIVATE parakeet)
-# Export only our C API. GGML must stay private alongside whisper.rn/Moonshine.
+# Export only our C API; keep bundled GGML symbols private.
 target_link_options(${OMI_FRAMEWORK_NAME} PRIVATE "-Wl,-exported_symbols_list,${CMAKE_CURRENT_SOURCE_DIR}/exports.txt")
 set_target_properties(${OMI_FRAMEWORK_NAME} PROPERTIES
     FRAMEWORK TRUE

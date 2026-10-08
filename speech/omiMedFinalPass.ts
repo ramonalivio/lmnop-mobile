@@ -1,6 +1,6 @@
 import { NativeModules } from 'react-native';
 import { getOmiMedModelPath } from './omiMedModel';
-import { WhisperAudio, hasSpeechEnergy, whisperPcm16 } from './whisperAudio';
+import { SpeechAudio, hasSpeechEnergy, speechPcm16 } from './speechAudio';
 import { normalizeClinicalText } from './normalizeClinicalText';
 import { SpeechProfiler, speechProfileNow } from './speechProfiler';
 
@@ -24,7 +24,7 @@ function pcmBase64(buffer: ArrayBuffer) {
 }
 export class OmiMedFinalPass {
   private id = `omi-med-${Date.now()}-${++nextSession}`;
-  private audio = new WhisperAudio();
+  private audio = new SpeechAudio();
   private failure: unknown = null;
   private cancelled = false;
   private loaded = false;
@@ -137,7 +137,7 @@ export class OmiMedFinalPass {
           model: 'Omi Med STT v1 Q8_0 GGUF',
         });
         try {
-          const pcm = pcmBase64(whisperPcm16(samples, this.audio.rate));
+          const pcm = pcmBase64(speechPcm16(samples, this.audio.rate));
           const result = await NativeModules.OmiMedSpeech.transcribe(
             this.id,
             pcm,

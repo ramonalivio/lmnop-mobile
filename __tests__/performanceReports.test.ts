@@ -6,7 +6,7 @@ import {
   submitPerformanceReport,
   wavBytes,
 } from '../speech/performanceReports';
-import { WhisperAudio } from '../speech/whisperAudio';
+import { SpeechAudio } from '../speech/speechAudio';
 import { recordingMetrics } from '../speech/speechProfiler';
 
 const files = new Map<string, string>();
@@ -65,7 +65,7 @@ beforeEach(() => {
   }));
 });
 async function record() {
-  const audio = new WhisperAudio();
+  const audio = new SpeechAudio();
   audio.append(new Float32Array(16000).fill(0.2), 16000);
   await savePerformanceRecording(audio, {
     model: 'test',
@@ -74,7 +74,7 @@ async function record() {
   });
 }
 test('writes a playable PCM16 WAV and queues it only after persistence', async () => {
-  const audio = new WhisperAudio();
+  const audio = new SpeechAudio();
   audio.append(new Float32Array(48000).fill(0.2), 48000);
   const bytes = wavBytes(audio);
   expect(bytes.length).toBe(32044);
