@@ -1,8 +1,10 @@
-# LMNOP mobile app — public source snapshot
+# LMNOP mobile — unreleased sample project
 
-This repository shows the React Native iOS and Android app I built for LMNOP, a personal health-document workspace. It includes the mobile screens, dictation and offline speech workflows, transcript editing, native bridge source, and focused tests.
+LMNOP is a personal sample project I built to explore a health-document workspace. This repository is a public code sample from its React Native iOS and Android app. The app has not been released to users.
 
-The production backend, credentials, signing files, local recordings, downloaded speech models, compiled libraries, and generated build artifacts are **not** included. Service URLs in this snapshot use `example.invalid`, so this copy will not connect to the live service. Some native speech features require separately obtained model/runtime artifacts; this is a code-review sample rather than a turnkey release build.
+The sample includes mobile screens, dictation and offline speech workflows, transcript editing, native bridge source, and focused tests.
+
+Backend components, credentials, signing files, local recordings, downloaded speech models, compiled libraries, and generated build artifacts are **not** included. Service URLs in this snapshot use `example.invalid`, so this copy will not connect to a service. Some native speech features require separately obtained model/runtime artifacts. This is a code-review sample, not a ready-to-install app.
 
 ## Code map
 
@@ -14,6 +16,6 @@ The production backend, credentials, signing files, local recordings, downloaded
 
 ## Validation
 
-With dependencies installed, `npx tsc --noEmit` passes, and `npm test -- --runInBand --forceExit` passes 17 suites and 121 tests in this snapshot. Historical tests for retired online speech behavior, older model-download assumptions, and private release tooling are omitted. The original private project remains untouched.
+With dependencies installed, `npx tsc --noEmit` passes, and `npm test -- --runInBand --forceExit` passes 17 suites and 121 tests in this snapshot. Historical tests for retired online speech behavior, older model-download assumptions, and private build tooling are omitted. The original private project remains untouched.
 
 This snapshot contains no patient records or voice recordings.
